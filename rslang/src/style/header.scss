@@ -1,0 +1,32 @@
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #360570;
+    color: #fff;
+    gap: 93px;
+    padding: 18px;
+    font-family: "Inter",sans-serif;
+}
+.header-nav_list {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.8rem;
+    padding-top: 1.6rem;
+}
+.header-nav_list li {
+    padding-left: 16px;
+}
+.header__btn {
+    margin-left: auto;
+    margin-right: 37px;
+}
+.btn {
+    background-color: #9B6AD6;
+    color: #fff;
+    font-size: 2.6rem;
+    width: 180px;
+    height: 55px;
+    margin: 0;
+    padding: 0;
+}
