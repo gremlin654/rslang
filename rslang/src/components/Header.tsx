@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../style/header.scss'
 
 
@@ -12,16 +13,16 @@ export default function Header() {
                 </div>
                 <nav className='header_nav'>
                     <ul className='header-nav_list'>
-                        <li>Главная</li>
-                        <li>Учебник</li>
-                        <li>Мини-игры</li>
-                        <li>Статитика</li>
-                        <li>Настройкиы</li>
-                        <li>О команде</li>
+                        <li><Link to='/'>Главная</Link></li>
+                        <li><Link to='/handbook'>Учебник</Link></li>
+                        <li><Link to='/games'>Мини-игры</Link></li>
+                        <li><Link to='/statistics'>Статитика</Link></li>
+                        <li><Link to='/settings'>Настройки</Link></li>
+                        <li><Link to='/about'>О команде</Link></li>
                     </ul>
                 </nav>
                 <div className='header__btn'>
-                    <button className='btn'>Войти</button>
+                    <button className='btn'><Link to='/login'>Войти</Link></button>
                 </div>
             </div>
         </div>
