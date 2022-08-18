@@ -34,7 +34,7 @@ export default function Header() {
           </nav>
           <div className='header__btn'>
             <button className='btn'>
-              <Link to='/login'>Войти</Link>
+              <Link to='/signin'>Войти</Link>
             </button>
           </div>
         </div>
