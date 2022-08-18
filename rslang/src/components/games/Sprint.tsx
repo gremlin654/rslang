@@ -1,10 +1,5 @@
-
-
-export function Sprint() {
-    return (
-        <div className="sprint">
-
-            
-        </div>
-    )
+const Sprint = () => {
+  return <div>Sprint</div>
 }
+
+export default Sprint
