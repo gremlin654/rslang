@@ -1,6 +1,6 @@
 import { postAPI } from './../services/PostService';
 import wordReduser from './reducers/WordSlice';
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
+import {combineReducers, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 
 
 const rootReducer = combineReducers({
