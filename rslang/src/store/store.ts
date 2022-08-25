@@ -1,11 +1,16 @@
-import { postAPI } from './../services/PostService';
-import wordReduser from './reducers/WordSlice';
+import userSlice from './reducers/UserSlice';
+import loginSlice from './reducers/LoginSlice';
+import { postAPI, registrationAPI } from './../services/PostService';
+import wordSlice from './reducers/WordSlice';
 import {combineReducers, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 
 
 const rootReducer = combineReducers({
-    wordReduser,
-    [postAPI.reducerPath]: postAPI.reducer
+    loginSlice,
+    wordSlice,
+    userSlice,
+    [postAPI.reducerPath]: postAPI.reducer,
+    [registrationAPI.reducerPath]: registrationAPI.reducer
 });
 
 export const setupStore = () => {
