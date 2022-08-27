@@ -1,5 +1,5 @@
+import React from 'react'
 import { TableCell, TableRow } from '@mui/material'
-import React, { MouseEventHandler } from 'react'
 import { IWord } from '../../models/IWord'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'
 import { createSound } from './Sprint'
@@ -17,6 +17,7 @@ export const GameResultRow = ({ answer, backgroundColor }: IGameResultRow) => {
   const playSound = (event: React.MouseEvent<HTMLButtonElement>) => {
     const path = event.currentTarget.value
     const audioWord = createSound(`https://rs-lang-back-diffickmenlogo.herokuapp.com/${path}`, wordVolume, 0.9)
+    Howler.stop()
     audioWord.play()
   }
   return (

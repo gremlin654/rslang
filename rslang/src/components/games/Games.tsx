@@ -2,7 +2,7 @@ import '../../style/Games.scss'
 import SprintImg from '../../assets/sprint.jpg'
 import AudioChalengeImg from '../../assets/audioChalenge.jpg'
 import Box from '@mui/material/Box/Box'
-import LevelButton from './LevelButton/LevelButton'
+import LevelButton from './LevelButton'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { setLevelAndPage } from '../../store/reducers/ActionCreaters'
@@ -31,7 +31,7 @@ const Games = () => {
             <h3 className='game__title'>Спринт</h3>
             <p className='game__text'>Проверьте себя, сколько очков вы cможете получить за одну минуту, отвечая , что правильно, а что нет.</p>
           </div>
-          <button className='game__btn btn' disabled={level === null}>
+          <button className='game__btn' disabled={level === null}>
             {level === null ? (
               'Играть'
             ) : (
@@ -48,7 +48,7 @@ const Games = () => {
             <h3 className='game__title'>Аудиовызов </h3>
             <p className='game__text'>Проверьте свои навыки слушания, выбирая правильное значение после услышанного слова.</p>
           </div>
-          <button className='game__btn btn' disabled={level === null}>
+          <button className='game__btn' disabled={level === null}>
             {level === null ? (
               'Играть'
             ) : (

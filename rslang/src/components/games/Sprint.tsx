@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import '../../style/Sprint.scss'
-import { Button, Card, CardActions, CardContent, CardMedia, CircularProgress, LinearProgress, Paper, Typography, Box } from '@mui/material'
+import { Button, Card, CardActions, CardContent, CircularProgress, LinearProgress, Box } from '@mui/material'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Howl, Howler } from 'howler'
@@ -19,7 +18,7 @@ import { Link } from 'react-router-dom'
 
 export const createSound = (src: string, volume: number, rate = 1, loop = false) => new Howl({ src, volume: 0.01 * volume, rate, loop })
 
-function toggleScreen(elem: HTMLDivElement) {
+export function toggleScreen(elem: HTMLDivElement) {
   if (document.fullscreenElement) {
     document.exitFullscreen()
   } else {
@@ -125,22 +124,22 @@ export const Sprint = () => {
   }, [seconds, audioFon, currentNumber, wordsArray.length])
 
   useEffect(() => {
-    if (!endGame && musicVolume) {
+    if (!endGame && musicVolume && !isLoading) {
       audioFon.play()
     }
     return () => {
       Howler.stop()
     }
-  }, [endGame, audioFon, musicVolume])
+  }, [endGame, audioFon, musicVolume, isLoading])
 
   useEffect(() => {
     if (endGame) return
     const keyboardClick = (evt: KeyboardEvent) => {
       if (!Object.values(keyCode).includes(evt.code)) return
       let value = ''
-      if (evt.code === 'ArrowRight') {
+      if (evt.code === keyCode.ArrowRight) {
         value = 'true'
-      } else if (evt.code === 'ArrowLeft') {
+      } else if (evt.code === keyCode.ArrowLeft) {
         value = 'false'
       }
 

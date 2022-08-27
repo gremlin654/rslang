@@ -40,4 +40,32 @@
   &__text {
     font-size: 1.6rem;
   }
+  &__btn {
+    background-color: #9b6ad6;
+    font-size: 1.5rem;
+    min-width: 150px;
+    height: 50px;
+    margin: 0;
+    padding: 5px;
+    transform: scale(1);
+    transition: all 0.5s ease 0s;
+    border-radius: 4px;
+    text-transform: uppercase;
+    &:hover {
+      transition: 0.3s;
+      background: rgba(233, 214, 255, 0.8235294118);
+    }
+    & a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      color: #fff;
+    }
+    & a:hover {
+      transition: 0.3s;
+      color: #9b6ad6;
+    }
+  }
 }

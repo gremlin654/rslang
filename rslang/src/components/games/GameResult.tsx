@@ -18,6 +18,10 @@ interface IGameStats {
   lifes?: number
 }
 
+function getMaxOfArray(numArray: number[]) {
+  return Math.max.apply(null, numArray)
+}
+
 export const GameResult = ({ allSeries, correctAnswers, failAnswers, lifes, gameName }: IGameStats) => {
   const { soundVolume } = useAppSelector((state) => state.levelSlice.settings)
   const { token } = useAppSelector((state) => state.levelSlice.userData)
@@ -38,6 +42,7 @@ export const GameResult = ({ allSeries, correctAnswers, failAnswers, lifes, game
   }, [allSeries, correctAnswers, dispatch, failAnswers, gameName, token])
 
   useEffect(() => {
+    Howler.stop()
     sendUserStats()
     if ((lifes as number) <= 0 || !correctAnswers.length || failAnswers.length > 5) {
       audioDefeat.play()
@@ -57,6 +62,7 @@ export const GameResult = ({ allSeries, correctAnswers, failAnswers, lifes, game
   return (
     <div>
       <h1 style={{ fontSize: '3rem' }}>{title}</h1>
+      <h2 style={{ fontSize: '3rem' }}>{`Максимальная длинна серии: ${getMaxOfArray(allSeries)}`}</h2>
       <TableContainer component={Paper} sx={{ maxHeight: 335, margin: '20px auto' }}>
         <Table sx={{ minWidth: 320 }} aria-label='simple table'>
           <TableHead>

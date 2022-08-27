@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button'
-import { useAppDispatch } from '../../../hooks/redux'
-import { levelSlice } from '../../../store/reducers/WordGroupSlice'
+import { useAppDispatch } from '../../hooks/redux'
+import { levelSlice } from '../../store/reducers/WordGroupSlice'
 
 interface ILevelButtonProps {
   item: number
