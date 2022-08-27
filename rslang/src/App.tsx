@@ -10,8 +10,6 @@ import { postAPI } from './services/PostService'
 import { BookContainer } from './components/book/BookContainer'
 
 function App() {
-  // const { data: words, error, isLoading } = postAPI.useGetWordsQuery(1)
-  // console.log(isLoading, words, error)
   return (
     <div className='App'>
       <Header />
