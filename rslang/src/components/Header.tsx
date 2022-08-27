@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../style/Header.scss'
+import '../style/header.scss'
 
 export default function Header() {
   return (
@@ -16,7 +16,7 @@ export default function Header() {
                 <Link to='/'>Главная</Link>
               </li>
               <li>
-                <Link to='/handbook'>Учебни к</Link>
+                <Link to='/book'>Учебник</Link>
               </li>
               <li>
                 <Link to='/games'>Мини-игры</Link>
