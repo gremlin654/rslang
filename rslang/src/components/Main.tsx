@@ -1,5 +1,5 @@
 import React from 'react'
-import '../style/Main.scss'
+import '../style/main.scss'
 import img from '../assets/main.jpg'
 import { ReactComponent as Res } from '../assets/results-icon.svg' 
 import { ReactComponent as Unit } from '../assets/unti-icon.svg'

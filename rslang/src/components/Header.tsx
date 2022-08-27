@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+<<<<<<< HEAD
+import '../style/header.scss'
+=======
 import { useAppSelector } from '../hooks/redux';
 import '../style/Header.scss'
 import { Avatar } from '@mui/material';
+>>>>>>> develop
 
 export default function Header() {
   const user = useAppSelector((state ) => state.userSlice);
@@ -19,7 +23,11 @@ export default function Header() {
                 <Link to='/'>Главная</Link>
               </li>
               <li>
+<<<<<<< HEAD
+                <Link to='/book'>Учебник</Link>
+=======
                 <Link to='/handbook'>Учебник</Link>
+>>>>>>> develop
               </li>
               <li>
                 <Link to='/games'>Мини-игры</Link>
