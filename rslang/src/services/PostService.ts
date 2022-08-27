@@ -46,34 +46,3 @@ export const registrationAPI = createApi({
     }),
   }),
 });
-
-// const token = localStorage.key(0) === 'user' ? JSON.parse(localStorage.getItem('user') || '{}').data.token : null;
-// export const statisticsAPI = createApi({
-//   reducerPath: 'statisticsAPI',
-//   baseQuery: fetchBaseQuery({ baseUrl: 'https://rs-lang-back-diffickmenlogo.herokuapp.com' }),
-//   endpoints: (builder) => ({
-//     getStatistics: builder.mutation<IStatistics, {correctArr: Array<string>, failArr: Array<string>, seriesArr: Array<string>, gameName: string }>({
-//       query: () => ({
-//         url: '/statistics',
-//         method: 'POST',
-//         headers: {
-//           Authorization: `Bearer '${token}'`
-//         }
-//       }),
-//     }),
-//   }),
-// });
-
-// export const settingsAPI = createApi({
-//   reducerPath: 'settingsAPI',
-//   baseQuery: fetchBaseQuery({ baseUrl: 'https://rs-lang-back-diffickmenlogo.herokuapp.com' }),
-//   endpoints: (builder) => ({
-//     getSettings: builder.mutation<IUser,{user: IUser, settingName: string, settingValue: boolean | number}>({
-//       query: ({user, settingName, settingValue}) => ({
-//         url: '/settings',
-//         method: 'POST',
-//         body: {user, settingName, settingValue},
-//       }),
-//     }),
-//   }),
-// })
