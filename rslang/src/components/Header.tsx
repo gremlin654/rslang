@@ -1,8 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+<<<<<<< HEAD
 import '../style/header.scss'
+=======
+import { useAppSelector } from '../hooks/redux';
+import '../style/Header.scss'
+import { Avatar } from '@mui/material';
+>>>>>>> develop
 
 export default function Header() {
+  const user = useAppSelector((state ) => state.userSlice);
   return (
     <header>
       <div className='wrapper'>
@@ -16,7 +23,11 @@ export default function Header() {
                 <Link to='/'>Главная</Link>
               </li>
               <li>
+<<<<<<< HEAD
                 <Link to='/book'>Учебник</Link>
+=======
+                <Link to='/handbook'>Учебник</Link>
+>>>>>>> develop
               </li>
               <li>
                 <Link to='/games'>Мини-игры</Link>
@@ -25,7 +36,7 @@ export default function Header() {
                 <Link to='/statistics'>Статитика</Link>
               </li>
               <li>
-                <Link to='/settings'>Настройки</Link>
+                <Link to='/profile'>Настройки</Link>
               </li>
               <li>
                 <Link to='/about'>О команде</Link>
@@ -33,9 +44,7 @@ export default function Header() {
             </ul>
           </nav>
           <div className='header__btn'>
-            <button className='btn'>
-              <Link to='/login'>Войти</Link>
-            </button>
+              {user.userId !== '' ? <Link to='/profile' className='profile__icon'><Avatar src={user.avatarURL} sx={{width: 50, height: 50}} color='primary' /></Link> :<button className='btn'><Link to='/signin'><p>Войти</p></Link></button>}
           </div>
         </div>
       </div>
