@@ -9,6 +9,7 @@ import { postAPI } from './services/PostService'
 import { SignIn } from './components/sign/SignIn'
 import { SignUp } from './components/sign/SignUp'
 import { Profile } from './components/profile/Profile'
+import { Statistics } from './components/stats/Statistics'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/statistics' element={<Statistics />} />
       </Routes>
       <Footer />
     </div>
