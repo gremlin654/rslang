@@ -1,14 +1,15 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect } from 'react'
+import '../../style/GameResult.scss'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { IWord } from '../../models/IWord'
-import { createSound } from './Sprint'
-import WinSound from '../../assets/sound/win.mp3'
-import LoseSound from '../../assets/sound/lose.mp3'
 import { Howler } from 'howler'
-import { postStats } from '../../store/reducers/ActionCreaters'
+// import { postStats } from '../../store/reducers/ActionCreaters'
 import { Table, TableCell, TableHead, TableRow, TableBody, Box, TableContainer, Paper, Button } from '@mui/material'
 import { GameResultRow } from './GameResultRow'
 import { Link } from 'react-router-dom'
+import { IFullUser } from '../../models/IUser'
+import { useDispatch } from 'react-redux'
+import { userSlice } from '../../store/reducers/UserSlice'
 
 interface IGameStats {
   allSeries: number[]
@@ -18,51 +19,69 @@ interface IGameStats {
   lifes?: number
 }
 
+interface ISettings {
+  user: IFullUser
+  gameName: string
+  correctAnswers: IWord[]
+  failAnswers: IWord[]
+  allSeries: number[]
+}
+
 function getMaxOfArray(numArray: number[]) {
   return Math.max.apply(null, numArray)
 }
 
 export const GameResult = ({ allSeries, correctAnswers, failAnswers, lifes, gameName }: IGameStats) => {
-  const { soundVolume } = useAppSelector((state) => state.levelSlice.settings)
-  const { token } = useAppSelector((state) => state.levelSlice.userData)
+  const user = useAppSelector((state) => state.userSlice) as IFullUser
   const dispatch = useAppDispatch()
+  const setStatistics = userSlice.actions.setStatistics
 
-  const [title, setTitle] = useState<string>('')
-  const [addStats, setAddStats] = useState<boolean>(false)
-
-  const audioWin = useMemo(() => createSound(WinSound, soundVolume), [soundVolume])
-  const audioDefeat = useMemo(() => createSound(LoseSound, soundVolume), [soundVolume])
+  const postStats = useCallback(async (settings: ISettings) => {
+    try {
+      const config = {
+        method: 'POST',
+        withCredentials: true,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${settings.user.token}`,
+        },
+        body: JSON.stringify({
+          userName: settings.user.userName,
+          gameName: settings.gameName,
+          correctArr: settings.correctAnswers,
+          failArr: settings.failAnswers,
+          seriesArr: settings.allSeries,
+        }),
+      }
+      const response = await fetch('https://rs-lang-back-diffickmenlogo.herokuapp.com/statistics', config)
+      const data = await response.json()
+      dispatch(setStatistics(data))
+      return console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
 
   const sendUserStats = useCallback(async () => {
-    if (!token) {
+    if (!user.token) {
       return alert('Статистика не была обновлена, авторизуйтесь')
     }
     if (!correctAnswers.length && !failAnswers.length) return
-    await dispatch(postStats({ token, gameName, correctAnswers, failAnswers, allSeries }))
-  }, [allSeries, correctAnswers, dispatch, failAnswers, gameName, token])
+    await postStats({ user, gameName, correctAnswers, failAnswers, allSeries })
+  }, [])
 
   useEffect(() => {
     Howler.stop()
     sendUserStats()
-    if ((lifes as number) <= 0 || !correctAnswers.length || failAnswers.length > 5) {
-      audioDefeat.play()
-      setTitle('В этот раз не получилось. Продолжай тренироваться')
-    } else {
-      audioWin.play()
-      setTitle('Отличная работа! Не сбавляй обороты')
-    }
-  }, [audioDefeat, audioWin, correctAnswers.length, failAnswers.length, lifes, sendUserStats])
-
-  useEffect(() => {
-    return () => {
-      Howler.stop()
-    }
-  }, [audioWin, audioDefeat])
+  }, [correctAnswers.length, failAnswers.length, lifes, sendUserStats])
 
   return (
-    <div>
-      <h1 style={{ fontSize: '3rem' }}>{title}</h1>
-      <h2 style={{ fontSize: '3rem' }}>{`Максимальная длинна серии: ${getMaxOfArray(allSeries)}`}</h2>
+    <div className='game-result__container'>
+      <h1 className='game-result__title'>Результаты:</h1>
+      <h2 className='game-result__series-title'>
+        Максимальная длинна серии: <span className='game-result__series-number'>{`${allSeries.length ? getMaxOfArray(allSeries) : 0}`}</span>
+      </h2>
       <TableContainer component={Paper} sx={{ maxHeight: 335, margin: '20px auto' }}>
         <Table sx={{ minWidth: 320 }} aria-label='simple table'>
           <TableHead>

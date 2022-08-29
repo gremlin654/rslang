@@ -82,6 +82,7 @@ export const AudioChallenge = () => {
           setCurrentNumber((prev) => prev + 1)
           setBlock(false)
         }, 2000)
+        Howler.stop()
         audioSuccess.play()
       } else {
         setFailAnswers((prev) => [...prev, currentWord])
@@ -99,6 +100,7 @@ export const AudioChallenge = () => {
           setCurrentNumber((prev) => prev + 1)
           setBlock(false)
         }, 2000)
+        Howler.stop()
         audioFail.play()
         setLifes((prev) => prev - 1)
       }
@@ -129,6 +131,7 @@ export const AudioChallenge = () => {
         if (lifes === 0) {
           Howler.stop()
         } else {
+          Howler.stop()
           audioWord.play()
         }
       }, 200)
@@ -198,7 +201,7 @@ export const AudioChallenge = () => {
       {isLoading ? (
         <CircularProgress className='game-audio__loader' />
       ) : endGame ? (
-        <GameResult allSeries={allSeries} gameName='sprint' correctAnswers={correctAnswers} failAnswers={failAnswers} />
+        <GameResult allSeries={allSeries} gameName='audio' correctAnswers={correctAnswers} failAnswers={failAnswers} />
       ) : (
         <div ref={gameBoard} className='game-audio__board'>
           <LinearProgress

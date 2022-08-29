@@ -15,6 +15,8 @@ import { RoundTimer } from './RoundTimer'
 import { levelSlice } from '../../store/reducers/WordGroupSlice'
 import { GameResult } from './GameResult'
 import { Link } from 'react-router-dom'
+import VolumeUpIcon from '@mui/icons-material/VolumeUp'
+import VolumeOffIcon from '@mui/icons-material/VolumeOff'
 
 export const createSound = (src: string, volume: number, rate = 1, loop = false) => new Howl({ src, volume: 0.01 * volume, rate, loop })
 
@@ -50,6 +52,8 @@ export const Sprint = () => {
   const [fullScreen, setFullScreen] = useState<boolean>(false)
   const [currentSeries, setCurrentSeries] = useState<number>(0)
   const [allSeries, setAllSeries] = useState<number[]>([])
+  const [mute, setMute] = useState<boolean>(false)
+
   const gameBoard = useRef() as MutableRefObject<HTMLDivElement>
   const seriesContainer = useRef() as MutableRefObject<HTMLDivElement>
   const timer = useRef<string | number | undefined | ReturnType<typeof setInterval>>()
@@ -85,8 +89,6 @@ export const Sprint = () => {
         audioFail.play()
       }
       setCurrentNumber((prev) => prev + 1)
-      console.log(correctAnswers)
-      console.log(failAnswers)
     },
     [audioFail, audioSuccess, currentRussianWord, currentSeries, currentWord, endGame],
   )
@@ -162,6 +164,13 @@ export const Sprint = () => {
     setFullScreen((prev) => !prev)
     toggleScreen(elem)
   }
+  useEffect(() => {
+    Howler.mute(mute)
+  }, [mute])
+
+  function goMute() {
+    setMute((prev) => !prev)
+  }
 
   return (
     <div className='game-sprint__container'>
@@ -182,14 +191,14 @@ export const Sprint = () => {
               width: '80%',
             }}
           />
-          <h4 className='game-sprint__progress-text'>
+          {/* <h4 className='game-sprint__progress-text'>
             Правильные ответы:&#160;
             <span className='game-sprint__progress-correct'>{correctAnswers.length || 0}</span>
           </h4>
           <h4 className='game-sprint__progress-text'>
             Ошибки:&#160;
             <span className='game-sprint__progress-fail'>{failAnswers.length || 0}</span>
-          </h4>
+          </h4> */}
           <div ref={seriesContainer} className='game-sprint__series-container' />
           <Card
             sx={{
@@ -201,6 +210,11 @@ export const Sprint = () => {
               border: '0.2rem solid rgba(233, 214, 255, 0.8235294118)',
             }}
           >
+            {mute ? (
+              <VolumeOffIcon className='game-sprint__btn-sound' onClick={goMute} />
+            ) : (
+              <VolumeUpIcon onClick={goMute} className='game-sprint__btn-sound' />
+            )}
             {fullScreen ? (
               <FullscreenExitIcon className='game-sprint__btn-fullscreen' onClick={() => goFullScreen(gameBoard.current)} />
             ) : (

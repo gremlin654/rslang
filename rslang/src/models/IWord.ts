@@ -9,6 +9,9 @@ export interface IWord {
   audioExample: string
   textMeaning: string
   transcription: string
+  textExample: string
+  textExampleTranslate: string
+  textMeaningTranslate: string
   wordTranslate: string
 }
 
@@ -16,7 +19,12 @@ export interface IWordState {
   words: IWord[]
   isLoading: boolean
   error: string
+  page: number
+  group: number
+  perPage: number
+  totalCount: number
 }
+
 export interface IWordGroupState {
   words: IWord[]
   isLoading: boolean
@@ -41,4 +49,11 @@ export interface IWordGroupState {
   userWords: []
   activeWords: []
   statistics: Record<string, unknown>
+}
+
+export interface IQeury {
+  page: number
+  group: number
+  perPage: number
+  totalCount: number
 }

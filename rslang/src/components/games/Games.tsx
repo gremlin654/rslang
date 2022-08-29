@@ -18,7 +18,8 @@ const Games = () => {
   const { level } = useAppSelector((state) => state.levelSlice)
 
   return (
-    <>
+    <div className='games__wrapper'>
+      <h1 className='games__title'>Выберите Уровень сложности игры:</h1>
       <Box component='div' sx={{ display: 'flex', justifyContent: 'center', gap: 2, p: 2 }}>
         {levels.map((item, index) => (
           <LevelButton key={item} item={item} index={index} level={level} />
@@ -59,7 +60,7 @@ const Games = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

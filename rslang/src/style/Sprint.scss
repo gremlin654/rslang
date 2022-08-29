@@ -19,6 +19,7 @@
     background: rgba(233, 214, 255);
     align-self: center;
     padding-top: 20px;
+    padding-bottom: 20px;
   }
   &__board {
     position: relative;
@@ -36,30 +37,39 @@
     position: absolute;
     right: 30px;
     top: 30px;
-    border: none;
-    outline: none;
     font-size: 3rem !important;
     cursor: pointer;
     font-weight: bold;
     color: inherit;
     @media (max-width: 450px) {
       right: 10px;
-      bottom: 10px;
+      top: 10px;
+    }
+  }
+  &__btn-sound {
+    position: absolute;
+    right: 60px;
+    top: 30px;
+    font-size: 3rem !important;
+    cursor: pointer;
+    font-weight: bold;
+    color: inherit;
+    @media (max-width: 450px) {
+      right: 10px;
+      top: 10px;
     }
   }
   &__btn-back {
     position: absolute;
     left: 30px;
     top: 30px;
-    border: none;
-    outline: none;
     font-size: 3rem !important;
     cursor: pointer;
     font-weight: bold;
     color: #000;
     @media (max-width: 450px) {
-      right: 10px;
-      bottom: 10px;
+      left: 10px;
+      top: 10px;
     }
   }
   &__word-container {

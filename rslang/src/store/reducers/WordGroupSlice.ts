@@ -1,4 +1,4 @@
-import { postStats, setLevelAndPage } from './ActionCreaters'
+import { setLevelAndPage } from './ActionCreaters'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IWordGroupState } from '../../models/IWord'
 
@@ -52,10 +52,10 @@ export const levelSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [postStats.fulfilled.type]: (state, action) => {
-      state.statistics = action.payload
-      state.userData = action.payload
-    },
+    // [postStats.fulfilled.type]: (state, action) => {
+    //   state.statistics = action.payload
+    //   state.userData = action.payload
+    // },
   },
 })
 

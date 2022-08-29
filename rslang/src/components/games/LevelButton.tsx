@@ -32,6 +32,11 @@ const LevelButton = ({ item, index, level }: ILevelButtonProps) => {
               backgroundColor: 'rgba(233, 214, 255, 0.8235294118)',
               fontSize: 20,
               '&:hover': { color: '#9b6ad6', background: 'rgba(233, 214, 255, 0.8235294118)' },
+              '@media (max-width: 640px)': {
+                width: 30,
+                height: 30,
+                minWidth: 30,
+              },
             }
           : {
               width: 50,
@@ -40,6 +45,11 @@ const LevelButton = ({ item, index, level }: ILevelButtonProps) => {
               backgroundColor: '#9b6ad6',
               fontSize: 20,
               '&:hover': { color: '#9b6ad6', background: 'rgba(233, 214, 255, 0.8235294118)' },
+              '@media (max-width: 640px)': {
+                width: 30,
+                height: 30,
+                minWidth: 30,
+              },
             }
       }
       onClick={setParametrs}
