@@ -31,14 +31,25 @@
 }
 .btn {
   background-color: #9b6ad6;
-  color: #fff;
   font-size: 2.6rem;
   width: 180px;
   height: 55px;
   margin: 0;
   padding: 0;
   &:hover {
-    background-color: #fff;
+    transition: 0.3s;
+    background: rgba(233, 214, 255, 0.8235294118);
+  }
+  & a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+  }
+  & a:hover {
+    transition: 0.3s;
     color: #9b6ad6;
   }
 }
