@@ -1,3 +1,5 @@
+import { IUserWord } from './IWord'
+
 export interface IUser {
   name: string
   email: string
@@ -112,36 +114,36 @@ export interface ISettingsValue {
 }
 
 export interface IFullUser {
-  token: string
-  userId: string
-  userName: string
-  userEmail: string
-  avatarURL: string
-  settings: {
-    soundVolume: number
-    musicVolume: number
-    wordVolume: number
-    difficultWord: boolean
-    deleteWord: boolean
-    translateWord: boolean
-    translateSentences: boolean
-    theme: string
-  }
-  userWords: Array<string>
-  statistics: {
-    todayDate: string
-    learnedWordsTotal: number
-    learnedWordsToday: number
-    learnedWordsPerDate: Array<string>
-    percentToday: string
-    games: Array<{
-      name: string
-      longestSeries: number
-      correctPercent: number
-      wordsCount: number
-    }>
-  }
-  message: string
+    token: string
+    userId: string
+    userName: string
+    userEmail: string
+    avatarURL: string
+    settings : {
+        soundVolume: number
+        musicVolume: number
+        wordVolume: number
+        difficultWord: boolean
+        deleteWord: boolean
+        translateWord: boolean
+        translateSentences: boolean
+        theme: string
+    },
+    userWords: IUserWord[],
+    statistics: {
+        todayDate: string
+        learnedWordsTotal: number
+        learnedWordsToday: number
+        learnedWordsPerDate: Array<string>
+        percentToday: string
+        games: Array<{
+            name: string
+            longestSeries: number
+            correctPercent: number
+            wordsCount: number
+        }>,
+    },
+    message: string
 }
 
 export interface IResponse {

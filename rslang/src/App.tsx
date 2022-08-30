@@ -13,6 +13,7 @@ import { BookContainer } from './components/book/BookContainer'
 import { SignIn } from './components/sign/SignIn'
 import { SignUp } from './components/sign/SignUp'
 import { Profile } from './components/profile/Profile'
+import { Difficult } from './components/book/Difficult'
 import { Statistics } from './components/stats/Statistics'
 import { About } from './components/about/About'
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/games/sprint' element={<Sprint />} />
         <Route path='/games/audio_chalenge' element={<AudioChallenge />} />
         <Route path='/book' element={<BookContainer />} />
+        <Route path='/book/difficult' element={<Difficult/>} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/profile' element={<Profile />} />
