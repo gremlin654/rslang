@@ -1,22 +1,34 @@
 import { fetchWords } from './ActionCreaters'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IWordState } from '../../models/IWord'
 
 const initialState: IWordState = {
   words: [],
   isLoading: false,
   error: '',
+  page: 0,
+  group: 0,
+  perPage: 29,
+  totalCount: 20
 }
 
 export const wordSlice = createSlice({
   name: 'allWords',
   initialState,
-  reducers: {},
+  reducers: {
+    setPage: (state: IWordState, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
+    setGroup: (state: IWordState, action: PayloadAction<number>) => {
+      state.group = action.payload;
+    },
+  },
   extraReducers: {
     [fetchWords.fulfilled.type]: (state, action) => {
       state.words = action.payload
       state.isLoading = false
       state.error = ''
+      state.totalCount = 10;
     },
     [fetchWords.pending.type]: (state) => {
       state.isLoading = true

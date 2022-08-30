@@ -1,0 +1,38 @@
+.words-wrapper {
+    display: flex;
+    font-size: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 1600px;
+    margin: 0 auto;
+    > *{ 
+        flex-basis: 448px;
+    }
+}
+
+.words__img{ 
+    width: 100px;
+    height: 100px;
+}
+.sound-icon {
+    position: absolute;
+    margin-left: 10px;
+}
+
+.pages{
+    margin: 20px 0;
+    .page, .current-page{
+        font-size: 30px;
+        border: 1px solid lightcoral;
+        border-radius: 100%;
+        padding: 5px 10px;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+    .current-page {
+        border: 2px solid gray;
+        font-weight: 700;
+    }
+}
+

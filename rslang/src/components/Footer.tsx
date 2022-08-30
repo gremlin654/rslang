@@ -1,5 +1,5 @@
 import React from 'react'
-import '../style/Footer.scss'
+import '../style/footer.scss'
 import { ReactComponent as Git } from '../assets/github-icon.svg'
 import { ReactComponent as RSlogo } from '../assets/rs_school_js.svg'
 
