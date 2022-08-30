@@ -3,6 +3,7 @@ import { useAppSelector } from './../hooks/redux'
 import { IUser, IStatistics, ISettingsValue } from './../models/IUser'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
+
 export const postAPI = createApi({
   reducerPath: 'postAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rs-lang-back-diffickmenlogo.herokuapp.com/' }),

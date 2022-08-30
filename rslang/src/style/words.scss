@@ -35,4 +35,19 @@
         font-weight: 700;
     }
 }
-
+.btn-difficult {
+    text-align: left;
+    font-size: 24px;
+}
+.cards-container {
+    display: flex;
+    font-size: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 1600px;
+    margin: 0 auto;
+    > *{ 
+        flex-basis: 448px;
+    }
+}

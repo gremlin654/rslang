@@ -1,7 +1,6 @@
-import React, { FC } from 'react'
-import { IWord, IWordState } from '../../models/IWord'
-import { postAPI } from '../../services/PostService'
-import { Howl, Howler } from 'howler'
+import React, { FC, useCallback, useEffect, useState } from 'react'
+import { IWord } from '../../models/IWord'
+import { Howl } from 'howler'
 import '../../style/words.scss'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -10,71 +9,129 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { ReactComponent as Sound } from '../../assets/iconmonstr-sound-thin.svg' 
+import { IFullUser } from '../../models/IUser'
+import { useAppSelector } from '../../hooks/redux'
+import { ReactComponent as Star } from '../../assets/star.svg'
+import { ReactComponent as Delete } from '../../assets/delete.svg'
+import { useDispatch } from 'react-redux';
+import { userSlice } from '../../store/reducers/UserSlice';
 
 
 interface ElItemProps {
-  el: IWord;
+  word: IWord;
 }
 
-export const Book = ({el}: ElItemProps) => {
+export const Book = ({word}: ElItemProps) => {
+  const dispatch = useDispatch();
+  const user = useAppSelector((state ) => state.userSlice) as IFullUser;
+  const [difficult, setDifficult] = useState(false);
+  const addWords = userSlice.actions.addUserWords;
+  
+
   const soundAudio = new Howl({
-    src: [`https://rs-lang-back-diffickmenlogo.herokuapp.com/${el.audio}`] 
+    src: [`https://rs-lang-back-diffickmenlogo.herokuapp.com/${word.audio}`] 
   });
   const soundAudio1 = new Howl({
-    src: [`https://rs-lang-back-diffickmenlogo.herokuapp.com/${el.audioMeaning}`] 
+    src: [`https://rs-lang-back-diffickmenlogo.herokuapp.com/${word.audioMeaning}`] 
   });
   const soundAudio2 = new Howl({
-    src: [`https://rs-lang-back-diffickmenlogo.herokuapp.com/${el.audioExample}`] 
+    src: [`https://rs-lang-back-diffickmenlogo.herokuapp.com/${word.audioExample}`] 
   });
+
+  const uploadWordsUser: any = useCallback(async (object: {wordId: string, name: string, value: string, wordName: string}, token: string) => {
+    try{
+        const res = await fetch('https://rs-lang-back-diffickmenlogo.herokuapp.com/updateWord', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user.token}`,
+            },
+            body: JSON.stringify(object),
+        })
+        const data = await res.json();
+        console.log(data);
+        dispatch(addWords(data.userWords))
+    }catch(error){
+        console.log(error);
+    }
+  }, []);
+
+  const updateWord = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    
+    event.stopPropagation()
+    setDifficult(true);
+    const body = {
+        wordId: event.currentTarget.id,
+        name: event.currentTarget.dataset.name,
+        value: event.currentTarget.value,
+        wordName: event.currentTarget.dataset.wordName,
+        wordBody: word,
+    }
+    console.log(event.currentTarget.dataset.wordName)
+    console.log(body)
+    if (!user.token) {
+        // return showMessage(
+        //     'Для добавления / удаления слов необходимо авторизоваться',
+        //     404
+        // )
+    }
+    const { text, code } = await dispatch(uploadWordsUser(body, user.token))
+    // showMessage(text, code)
+}
   return (
-    // <div className='words-wrapper'>[ `https://rs-lang-back-diffickmenlogo.herokuapp.com/${el.audioExample}`]
-    //     <div className='words'>
-    //       <div style={{display: 'flex'}}>
-    //         <div onClick={() => {soundAudio.play()}}>{el.audio}</div>
-    //         <div>{el.word}</div>
-    //       </div>
-    //       <div>{el.transcription}</div>
-    //       <div>{el.audioExample}</div>
-    //       <div>{el.audioMeaning}</div>
-    //       <img src={`https://rs-lang-back-diffickmenlogo.herokuapp.com/${el.image}`} className='words__img'></img>
-    //       <div>{el.textMeaning}</div>
-    //     </div>
-    //     <Item />
-    // </div>
     <div>
-      <Card sx={{ height: '400px'}}>
+      <Card sx={{ height: '500px'}}>
         <CardMedia
           component="img"
           height="140"
-          image={`https://rs-lang-back-diffickmenlogo.herokuapp.com/${el.image}`}
+          image={`https://rs-lang-back-diffickmenlogo.herokuapp.com/${word.image}`}
           alt="green iguana"
         />
+        <CardActions>
+          {difficult ?  <button onClick={updateWord} data-name="deleted"
+                                        data-word-name={word.word}
+                                        id={word._id}
+                                        value={`${difficult}`}>
+            <Star width='40px' height='40px' ></Star>
+          </button> 
+              : 
+            <button onClick={updateWord} data-name="difficult"
+                                        data-word-name={word.word}
+                                        id={word._id}
+                                        value={`${difficult}`}>
+            <Star width='40px' height='40px' ></Star>
+          </button>}
+          <button onClick={updateWord} data-name="deleted"
+                                        data-word-name={word.word}
+                                        id={word._id}
+                                        value={`${difficult}`}>
+            <Delete width='40px' height='40px'></Delete>
+          </button>
+        </CardActions>
+        <div></div>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {el.word}/ {el.transcription} / {el.group} / {el.page}
+            {word.word}/ {word.transcription} / {word.group} / {word.page}
             <Sound onClick={() => {soundAudio.play(); setTimeout(() => soundAudio1.play(), 800); setTimeout(() => soundAudio2.play(), 6000) }} className='sound-icon'/>
           </Typography>
           <Typography gutterBottom variant="h5" component="div" color="rgb(136, 136, 136)">
-            {el.wordTranslate}
+            {word.wordTranslate}
           </Typography>
           <Typography variant="h5" color="black">
-            {el.textMeaning}
+            {word.textMeaning}
           </Typography>
           <Typography variant="h5" color="rgb(136, 136, 136)">
-            {el.textMeaningTranslate}
+            {word.textMeaningTranslate}
           </Typography>
           <br />
           <Typography variant="h5" color="black">
-            {el.textExample}
+            {word.textExample}
           </Typography>
           <Typography variant="h5" color="rgb(136, 136, 136)">
-            {el.textExampleTranslate}
+            {word.textExampleTranslate}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     </div>
   );

@@ -16,22 +16,10 @@ export const wordSliceUser = createSlice({
   name: 'allWordsUser',
   initialState,
   reducers: {
+    getUserWords: (state: IWordState, action: PayloadAction<IWordState>) => {
+      state.isLoading = false;
+    },
   },
-//   extraReducers: {
-//     [fetchWords.fulfilled.type]: (state, action) => {
-//       state.words = action.payload
-//       state.isLoading = false
-//       state.error = ''
-//       state.totalCount = 10;
-//     },
-//     [fetchWords.pending.type]: (state) => {
-//       state.isLoading = true
-//     },
-//     [fetchWords.rejected.type]: (state, action) => {
-//       state.isLoading = false
-//       state.error = action.payload
-//     },
-//   },
 })
 
 export default wordSliceUser.reducer
