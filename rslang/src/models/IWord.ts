@@ -48,10 +48,35 @@ export interface IWordState {
   totalCount: number
 }
 
-export interface IQeury {
-  page: number,
-  group: number,
-  perPage: number,
-  totalCount: number
+export interface IWordGroupState {
+  words: IWord[]
+  isLoading: boolean
+  error: string
+  level: null | number
+  userData: {
+    userName: string
+    userId: string
+    avatarURL: string
+    token: string
+  }
+  settings: {
+    musicVolume: number
+    soundVolume: number
+    wordVolume: number
+    difficultWord: boolean
+    deleteWord: boolean
+    translateWord: boolean
+    translateSentences: boolean
+    theme: string
+  }
+  userWords: []
+  activeWords: []
+  statistics: Record<string, unknown>
 }
 
+export interface IQeury {
+  page: number
+  group: number
+  perPage: number
+  totalCount: number
+}

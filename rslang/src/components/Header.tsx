@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector } from '../hooks/redux'
 import '../style/Header.scss'
-import { Avatar } from '@mui/material';
+import { Avatar } from '@mui/material'
 
 export default function Header() {
-  const user = useAppSelector((state ) => state.userSlice);
+  const user = useAppSelector((state) => state.userSlice)
   return (
     <header>
       <div className='wrapper'>
@@ -36,7 +36,17 @@ export default function Header() {
             </ul>
           </nav>
           <div className='header__btn'>
-              {user.userId !== '' ? <Link to='/profile' className='profile__icon'><Avatar src={user.avatarURL} sx={{width: 50, height: 50}} color='primary' /></Link> :<button className='btn'><Link to='/signin'><p>Войти</p></Link></button>}
+            {user.userId !== '' ? (
+              <Link to='/profile' className='profile__icon'>
+                <Avatar src={user.avatarURL} sx={{ width: 50, height: 50 }} color='primary' />
+              </Link>
+            ) : (
+              <button className='btn'>
+                <Link to='/signin'>
+                  <p>Войти</p>
+                </Link>
+              </button>
+            )}
           </div>
         </div>
       </div>

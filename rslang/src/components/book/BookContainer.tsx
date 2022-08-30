@@ -31,6 +31,9 @@ export const BookContainer = () => {
       <div className='btn-difficult'>
         <Link to='/book/difficult'>Сложные слова</Link>
       </div>
+      <div>
+        <Link to='/book/level'>Level A1</Link>
+      </div>
       <ButtonGroup variant="contained" aria-label="outlined primary button group">
           <Button onClick={() => {dispatch(setGroup(0))}}>Beginner(A1)</Button>
           <Button onClick={() => {dispatch(setGroup(1))}}>Pre-Intermediate(A2)</Button>
@@ -50,4 +53,3 @@ export const BookContainer = () => {
     </div>
   )
 }
-

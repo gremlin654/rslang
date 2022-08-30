@@ -73,7 +73,7 @@ export const Cards = ({word}: ElItemProps) => {
       const updateWord = async (event: React.MouseEvent<HTMLButtonElement>) => {
         
         event.stopPropagation()
-        setDifficult(false);
+        // setDifficult(false);
         const body = {
             wordId: event.currentTarget.id,
             name: event.currentTarget.dataset.name,

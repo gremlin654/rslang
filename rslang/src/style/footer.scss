@@ -1,20 +1,19 @@
 footer {
-    margin-top: 22px;
 }
 .footer__container {
-    background-color: #360570;
-    color: #fff;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 3rem;
-    padding: 10px;
+  background-color: #360570;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 3rem;
+  padding: 10px;
 }
 .footer-gitHub {
-    display: flex;
-    align-items: center;
-    a {
-        color: #fff;
-        padding-left: 20px;
-    }
+  display: flex;
+  align-items: center;
+  a {
+    color: #fff;
+    padding-left: 20px;
+  }
 }
