@@ -1,5 +1,6 @@
 import { IFullUser, ISettings, IUser } from './../../models/IUser';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { IUserWord } from '../../models/IWord';
 
 const initialState = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '{}')?.data : {
     token: '',
@@ -90,6 +91,10 @@ export const userSlice = createSlice({
         },
         setName : (state, action: PayloadAction<string>) => {
             state.userName = action.payload
+        },
+        addUserWords: (state, action: PayloadAction<IUserWord>) => {
+            state.userWords = action.payload
+            localStorage.setItem('user', JSON.stringify({data: state}));
         }
     },
 })

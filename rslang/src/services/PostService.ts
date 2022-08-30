@@ -5,11 +5,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
 
 
-interface IQeury {
-  page: number
-  group: number
-}
-
 export const postAPI = createApi({
   reducerPath: 'postAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rs-lang-back-diffickmenlogo.herokuapp.com/' }),

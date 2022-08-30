@@ -1,3 +1,5 @@
+import { IUserWord } from './IWord'
+
 export interface IUser {
     name: string,
     email: string,
@@ -107,7 +109,7 @@ export interface IFullUser {
         translateSentences: boolean
         theme: string
     },
-    userWords: Array<string>,
+    userWords: IUserWord[],
     statistics: {
         todayDate: string
         learnedWordsTotal: number

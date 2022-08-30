@@ -8,45 +8,28 @@ import { useAppSelector } from '../../hooks/redux'
 import { wordSlice } from '../../store/reducers/WordSlice'
 import { useDispatch } from 'react-redux'
 import { current } from '@reduxjs/toolkit'
+import { wordSliceUser } from '../../store/reducers/UserWords'
+import { Difficult } from './Difficult'
+import { Link } from 'react-router-dom'
+import { IFullUser } from '../../models/IUser'
  
 export const BookContainer = () => {
   const dispatch = useDispatch();
-   const page = useAppSelector((state) => state.wordReduser.page) as number;
-   const group = useAppSelector((state) => state.wordReduser.group) as number;
-   const totalCount = useAppSelector((state) => state.wordReduser.totalCount) as number;
-   const perPage = useAppSelector((state) => state.wordReduser.perPage) as number;
-   const pagesCount = Math.ceil(totalCount / perPage);
-   const pages = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
-   
-  //  function createPages(pages: number[], pagesCount: number, currentPage: number) {
-  //   if(pagesCount > 10) {
-  //       if(currentPage > 5) {
-  //           for (let i = currentPage-4; i <= currentPage+5; i++) {
-  //               pages.push(i)
-  //               if(i == pagesCount) break
-  //           }
-  //       }
-  //       else {
-  //           for (let i = 1; i <= 10; i++) {
-  //               pages.push(i)
-  //               if(i == pagesCount) break
-  //           }
-  //       }
-  //   }  else {
-  //       for (let i = 1; i <= pagesCount; i++) {
-  //           pages.push(i)
-  //       }
-  //   }
-  // }
-  // createPages(pages, pagesCount, page);
-   const setPage = wordSlice.actions.setPage;
-    const setGroup = wordSlice.actions.setGroup;
-    const { data: words, error, isLoading } = postAPI.useGetWordsQuery({page, group})
-    console.log(words)
+   const page = useAppSelector((state) => state.wordSlice.page) as number;
+   const group = useAppSelector((state) => state.wordSlice.group) as number;
+   const pages = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+
+  
+  const setUserWords = wordSliceUser.actions.getUserWords;
+  const setPage = wordSlice.actions.setPage;
+  const setGroup = wordSlice.actions.setGroup;
+  const { data: words, error, isLoading } = postAPI.useGetWordsQuery({page, group})
+  const user = useAppSelector((state ) => state.userSlice) as IFullUser;
+  console.log(user.userWords)
   return (
-    <div>
-      <div>
-        Избранные слова
+    <div className='wrapper'>
+      <div className='btn-difficult'>
+        <Link to='/book/difficult'>Сложные слова</Link>
       </div>
       <ButtonGroup variant="contained" aria-label="outlined primary button group">
           <Button onClick={() => {dispatch(setGroup(0))}}>Beginner(A1)</Button>
@@ -57,8 +40,8 @@ export const BookContainer = () => {
           <Button onClick={() => {dispatch(setGroup(5))}}>Mastery(C2)</Button>
         </ButtonGroup>
         <div className='words-wrapper'>
-            {words && words.map((el: IWord) => 
-                <Book key={el._id} el={el}/>
+            {words && words.map((word: IWord) => 
+                <Book key={word._id} word={word}/>
             )}
         </div>
         <div className='pages'>
