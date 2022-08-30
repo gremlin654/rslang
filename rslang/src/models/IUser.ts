@@ -152,3 +152,17 @@ export interface IResponse {
     }
   }
 }
+
+export interface IUserStatistics {
+  todayDate: string
+  learnedWordsTotal: Array<{ date: string; words: number }>
+  learnedWordsToday: number
+  learnedWordsPerDate: Array<string>
+  percentToday: string
+  games: Array<{
+    name: string
+    longestSeries: number
+    correctPercent: number
+    wordsCount: number
+  }>
+}
