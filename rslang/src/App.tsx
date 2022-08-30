@@ -13,6 +13,7 @@ import { BookContainer } from './components/book/BookContainer'
 import { SignIn } from './components/sign/SignIn'
 import { SignUp } from './components/sign/SignUp'
 import { Profile } from './components/profile/Profile'
+import { About } from './components/about/About'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/about' element={<About />} />
       </Routes>
       <Footer />
     </div>
