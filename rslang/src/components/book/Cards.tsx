@@ -63,7 +63,6 @@ export const Cards = ({word}: ElItemProps) => {
                 body: JSON.stringify(object),
             })
             const data = await res.json();
-            console.log(data);
             dispatch(addWords(data.userWords))
         }catch(error){
             console.log(error);
@@ -81,8 +80,6 @@ export const Cards = ({word}: ElItemProps) => {
             wordName: event.currentTarget.dataset.wordName,
             wordBody: word,
         }
-        console.log(event.currentTarget.dataset.wordName)
-        console.log(body)
         if (!user.token) {
             // return showMessage(
             //     'Для добавления / удаления слов необходимо авторизоваться',
@@ -112,7 +109,7 @@ export const Cards = ({word}: ElItemProps) => {
         </CardActions>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {word.word}/ {word.transcription} / {word.group} / {word.page}
+            {word.word}/ {word.transcription} / {word.group} / {word.page} / {word.fail}
             <Sound onClick={() => {soundAudio.play(); setTimeout(() => soundAudio1.play(), 800); setTimeout(() => soundAudio2.play(), 6000) }} className='sound-icon'/>
           </Typography>
           <Typography gutterBottom variant="h5" component="div" color="rgb(136, 136, 136)">

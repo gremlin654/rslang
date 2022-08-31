@@ -13,6 +13,10 @@ export interface IWord {
   textExampleTranslate: string
   textMeaningTranslate: string
   wordTranslate: string
+  deleted: boolean
+  difficult: boolean
+  correct: number
+  fail: number
 }
 
 export interface IUserWord {
