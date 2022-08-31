@@ -57,6 +57,7 @@ export const AudioChallenge = () => {
 
   const playWords = useCallback(async () => {
     setWordsArray(words)
+    Howler.mute(false)
     setTimeout(() => {
       setBlock(false)
     }, 200)
