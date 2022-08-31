@@ -1,5 +1,5 @@
-import React from 'react'
-import { IWord, IWordState } from '../../models/IWord'
+import React, { useEffect, useState } from 'react'
+import { IUserWord, IWord, IWordState } from '../../models/IWord'
 import { postAPI } from '../../services/PostService'
 import { Book } from './Book'
 import '../../style/words.scss'
@@ -25,7 +25,32 @@ export const BookContainer = () => {
   const setGroup = wordSlice.actions.setGroup;
   const { data: words, error, isLoading } = postAPI.useGetWordsQuery({page, group})
   const user = useAppSelector((state ) => state.userSlice) as IFullUser;
-  console.log(user.userWords)
+  const [arr, setArr] = useState([]);
+
+
+  useEffect(() => {
+    const arrUser: any = words?.map((word) => {
+      const foundWord = user.userWords.find(
+        (wordUser: any) => `${wordUser._id}` === `${word._id}`
+      )
+    if (foundWord) {
+      return word = {
+            ...word,
+            deleted: foundWord.deleted,
+            difficult: foundWord.difficult,
+            correct: foundWord.correct,
+            fail: foundWord.fail,
+        }
+    }
+    return word = {
+            ...word,
+            correct: 0,
+            fail: 0
+    };
+   })
+  setArr(arrUser);
+  console.log(arrUser);
+  }, [words])
   return (
     <div className='wrapper'>
       <div className='btn-difficult'>
@@ -43,7 +68,7 @@ export const BookContainer = () => {
           <Button onClick={() => {dispatch(setGroup(5))}}>Mastery(C2)</Button>
         </ButtonGroup>
         <div className='words-wrapper'>
-            {words && words.map((word: IWord) => 
+            {arr && arr.map((word: IWord) => 
                 <Book key={word._id} word={word}/>
             )}
         </div>

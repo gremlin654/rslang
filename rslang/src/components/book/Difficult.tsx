@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useAppSelector } from '../../hooks/redux'
 import { IFullUser } from '../../models/IUser'
@@ -9,6 +9,7 @@ import { Cards } from './Cards'
 export const Difficult = () => {
   const dispatch = useDispatch()
   const user = useAppSelector((state) => state.userSlice) as IFullUser
+  const [filter, setFilter] = useState([])
 
   const getWordsUser = useCallback(async () => {
     try {
@@ -21,18 +22,29 @@ export const Difficult = () => {
         },
       })
       const data = await res.json()
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
   }, [])
   getWordsUser()
   const wordsUser = user.userWords
+  useEffect(() => {
+    const resWords: any = wordsUser.filter((word: any) => word.fail === 1 || word.difficult === true)
+    setFilter(resWords)
+  }, [wordsUser])
+  // console.log(filter);
   console.log(wordsUser)
   return (
     <div className='wrapper'>
       <h2>Сложные слова</h2>
-      <div className='cards-container'>{wordsUser && wordsUser.map((word: any) => <Cards key={word._id} word={word} />)}</div>
+      <div className='cards-container'>
+        {/* {wordsUser && wordsUser.map((word: any) => 
+          <Cards key={word._id} word={word}/>
+        )} */}
+        {filter.map((word: any) => (
+          <Cards key={word._id} word={word} />
+        ))}
+      </div>
     </div>
   )
 }

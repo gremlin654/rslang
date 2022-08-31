@@ -50,7 +50,6 @@ export const Book = ({word}: ElItemProps) => {
             body: JSON.stringify(object),
         })
         const data = await res.json();
-        console.log(data);
         dispatch(addWords(data.userWords))
     }catch(error){
         console.log(error);
@@ -68,8 +67,6 @@ export const Book = ({word}: ElItemProps) => {
         wordName: event.currentTarget.dataset.wordName,
         wordBody: word,
     }
-    console.log(event.currentTarget.dataset.wordName)
-    console.log(body)
     if (!user.token) {
         // return showMessage(
         //     'Для добавления / удаления слов необходимо авторизоваться',
@@ -88,6 +85,12 @@ export const Book = ({word}: ElItemProps) => {
           image={`https://rs-lang-back-diffickmenlogo.herokuapp.com/${word.image}`}
           alt="green iguana"
         />
+        <div>
+            Правильно: {word.correct}
+          </div>
+          <div>
+            Ошибок: {word.fail}
+          </div>
         <CardActions>
           {difficult ?  <button onClick={updateWord} data-name="deleted"
                                         data-word-name={word.word}
