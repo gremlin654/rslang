@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 import { useAppSelector } from '../hooks/redux'
 import '../style/Header.scss'
 import { Avatar } from '@mui/material'
+import { IFullUser } from '../models/IUser'
 
 export default function Header() {
-  const user = useAppSelector((state) => state.userSlice)
+  const user = useAppSelector((state) => state.userSlice) as IFullUser
+
   return (
     <header>
       <div className='wrapper'>
@@ -24,9 +26,14 @@ export default function Header() {
               <li>
                 <Link to='/games'>Мини-игры</Link>
               </li>
-              <li>
-                <Link to='/statistics'>Статитика</Link>
-              </li>
+              {user.token ? (
+                <li>
+                  <Link to='/statistics'>Статитика</Link>
+                </li>
+              ) : (
+                ''
+              )}
+
               <li>
                 <Link to='/profile'>Настройки</Link>
               </li>

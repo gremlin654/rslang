@@ -8,6 +8,7 @@ export function StatsGraph({ userStatistics }: { userStatistics: IUserStatistics
     { name: `${games[2].name}`, Слова: +`${games[2].wordsCount}` },
     { name: `${games[3].name}`, Слова: +`${games[3].wordsCount}` },
   ]
+
   const dataAll = userStatistics.learnedWordsTotal.map((day) => ({ date: day.date, Слова: day.words }))
   return (
     <div className='statistics-content'>
