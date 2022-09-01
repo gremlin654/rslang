@@ -53,9 +53,14 @@ export const Sprint = () => {
   const [currentSeries, setCurrentSeries] = useState<number>(0)
   const [allSeries, setAllSeries] = useState<number[]>([])
   const [mute, setMute] = useState<boolean>(false)
+  const [score, setScore] = useState<number>(0)
+  const [multiScore, setMultiScore] = useState<number>(20)
+  const [borderRed, setBorderRed] = useState<boolean>(false)
+  const [borderGreen, setBorderGreen] = useState<boolean>(false)
 
   const gameBoard = useRef() as MutableRefObject<HTMLDivElement>
   const seriesContainer = useRef() as MutableRefObject<HTMLDivElement>
+  const multiSeriesContainer = useRef() as MutableRefObject<HTMLDivElement>
   const timer = useRef<string | number | undefined | ReturnType<typeof setInterval>>()
 
   const audioSuccess = useMemo(() => createSound(SuccessSound, soundVolume), [soundVolume])
@@ -78,13 +83,37 @@ export const Sprint = () => {
         (value === 'false' && currentWord.wordTranslate !== currentRussianWord)
       ) {
         seriesContainer.current.innerHTML += ' <img src="https://img.icons8.com/emoji/452/star-emoji.png"/>'
+        setBorderGreen(true)
+        setTimeout(() => {
+          setBorderGreen(false)
+        }, 200)
+        if (currentSeries >= 2 && currentSeries < 5) {
+          multiSeriesContainer.current.innerHTML = '<img src="https://img.icons8.com/color/48/000000/starfish.png"/>'
+          setMultiScore(40)
+        } else if (currentSeries >= 5 && currentSeries < 8) {
+          multiSeriesContainer.current.innerHTML =
+            '<img src="https://img.icons8.com/color/48/000000/starfish.png"/><img src="https://img.icons8.com/color/48/000000/starfish.png"/>'
+          setMultiScore(60)
+        } else if (currentSeries >= 8) {
+          multiSeriesContainer.current.innerHTML =
+            '<img src="https://img.icons8.com/color/48/000000/starfish.png"/><img src="https://img.icons8.com/color/48/000000/starfish.png"/><img src="https://img.icons8.com/color/48/000000/starfish.png"/>'
+          setMultiScore(80)
+        }
+        setScore((prev) => prev + multiScore)
         setCurrentSeries((prev) => prev + 1)
         setCorrectAnswers((prev) => [...prev, currentWord])
+        setAllSeries((prev) => [...prev, currentSeries])
         audioSuccess.play()
       } else {
+        setBorderRed(true)
+        setTimeout(() => {
+          setBorderRed(false)
+        }, 200)
+        setMultiScore(20)
         setAllSeries((prev) => [...prev, currentSeries])
         setCurrentSeries(0)
         seriesContainer.current.innerHTML = ''
+        multiSeriesContainer.current.innerHTML = ''
         setFailAnswers((prev) => [...prev, currentWord])
         audioFail.play()
       }
@@ -93,6 +122,7 @@ export const Sprint = () => {
     [audioFail, audioSuccess, currentRussianWord, currentSeries, currentWord, endGame],
   )
 
+  console.log(allSeries)
   useEffect(() => {
     if (wordsArray.length && currentNumber < wordsArray.length) {
       setCurrentWord(wordsArray[currentNumber])
@@ -174,10 +204,10 @@ export const Sprint = () => {
 
   return (
     <div className='game-sprint__container'>
-      {isLoading ? (
+      {isLoading && wordsArray ? (
         <CircularProgress className='game-sprint__loader' />
       ) : endGame ? (
-        <GameResult allSeries={allSeries} gameName='sprint' correctAnswers={correctAnswers} failAnswers={failAnswers} />
+        <GameResult allSeries={allSeries} gameName='sprint' correctAnswers={correctAnswers} failAnswers={failAnswers} score={score} />
       ) : (
         <div ref={gameBoard} className='game-sprint__board'>
           <LinearProgress
@@ -191,25 +221,20 @@ export const Sprint = () => {
               width: '80%',
             }}
           />
-          {/* <h4 className='game-sprint__progress-text'>
-            Правильные ответы:&#160;
-            <span className='game-sprint__progress-correct'>{correctAnswers.length || 0}</span>
-          </h4>
-          <h4 className='game-sprint__progress-text'>
-            Ошибки:&#160;
-            <span className='game-sprint__progress-fail'>{failAnswers.length || 0}</span>
-          </h4> */}
+          <Box sx={{ display: 'flex', fontSize: '2.5rem', gap: '4rem' }}>
+            <div className='game-sprint__score-container'>
+              Score:
+              <span className='game-sprint__score-number'>{score}</span>
+            </div>
+            <div className='game-sprint__score-container'>
+              Point:
+              <span className='game-sprint__score-number'>{`+ ${multiScore}`}</span>
+            </div>
+          </Box>
+
           <div ref={seriesContainer} className='game-sprint__series-container' />
-          <Card
-            sx={{
-              width: 320,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'column',
-              border: '0.2rem solid rgba(233, 214, 255, 0.8235294118)',
-            }}
-          >
+          <div ref={multiSeriesContainer} className='game-sprint__series-container' />
+          <Card className={`game-sprint__card ${borderRed ? 'game-sprint__card-red' : borderGreen ? 'game-sprint__card-green' : ''}`}>
             {mute ? (
               <VolumeOffIcon className='game-sprint__btn-sound' onClick={goMute} />
             ) : (

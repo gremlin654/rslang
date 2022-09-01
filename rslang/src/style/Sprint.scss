@@ -33,6 +33,20 @@
     padding: 10px 5px;
     background-color: rgb(233, 214, 255);
   }
+  &__card {
+    width: 320;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 0.2rem solid rgba(233, 214, 255, 0.8235294118);
+  }
+  &__card-red {
+    border: 0.2rem solid rgb(241 52 52);
+  }
+  &__card-green {
+    border: 0.2rem solid rgb(17, 169, 17);
+  }
   &__btn-fullscreen {
     position: absolute;
     right: 30px;
@@ -141,23 +155,17 @@
       font-size: 1.2rem;
     }
   }
-  &__progress-correct {
-    font-family: inherit;
-    color: #11a911;
-    font-size: 1.2em;
-    @media (max-width: 450px) {
-      margin-bottom: 5px;
-      font-size: 1rem;
-    }
+  &__score-container {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    font-weight: 600;
+    width: 140px;
+    gap: 1rem;
   }
-  &__progress-fail {
-    font-family: inherit;
-    color: #f13434;
-    font-size: 1.2em;
-    @media (max-width: 450px) {
-      margin-bottom: 5px;
-      font-size: 1rem;
-    }
+  &__score-number {
+    color: rgb(17, 169, 17);
   }
   &__loader {
     position: absolute;
