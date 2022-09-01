@@ -3,12 +3,10 @@ import '../../style/GameResult.scss'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { IWord } from '../../models/IWord'
 import { Howler } from 'howler'
-// import { postStats } from '../../store/reducers/ActionCreaters'
 import { Table, TableCell, TableHead, TableRow, TableBody, Box, TableContainer, Paper, Button } from '@mui/material'
 import { GameResultRow } from './GameResultRow'
 import { Link } from 'react-router-dom'
 import { IFullUser } from '../../models/IUser'
-import { useDispatch } from 'react-redux'
 import { userSlice } from '../../store/reducers/UserSlice'
 
 interface IGameStats {
@@ -17,6 +15,7 @@ interface IGameStats {
   correctAnswers: IWord[]
   gameName: string
   lifes?: number
+  score?: number
 }
 
 interface ISettings {
@@ -31,7 +30,7 @@ function getMaxOfArray(numArray: number[]) {
   return Math.max.apply(null, numArray)
 }
 
-export const GameResult = ({ allSeries, correctAnswers, failAnswers, lifes, gameName }: IGameStats) => {
+export const GameResult = ({ allSeries, correctAnswers, failAnswers, lifes, gameName, score }: IGameStats) => {
   const user = useAppSelector((state) => state.userSlice) as IFullUser
   const dispatch = useAppDispatch()
   const setStatistics = userSlice.actions.setStatistics
@@ -79,6 +78,13 @@ export const GameResult = ({ allSeries, correctAnswers, failAnswers, lifes, game
   return (
     <div className='game-result__container'>
       <h1 className='game-result__title'>Результаты:</h1>
+      {score ? (
+        <h2 className='game-result__series-title'>
+          Вы набрали: <span className='game-result__series-number'>{`${score} очков`}</span>
+        </h2>
+      ) : (
+        ''
+      )}
       <h2 className='game-result__series-title'>
         Максимальная длинна серии: <span className='game-result__series-number'>{`${allSeries.length ? getMaxOfArray(allSeries) : 0}`}</span>
       </h2>
@@ -129,20 +135,6 @@ export const GameResult = ({ allSeries, correctAnswers, failAnswers, lifes, game
         >
           <Link to='/games/'>Выбор игры</Link>
         </Button>
-        {/* <Button
-          sx={{
-            width: 110,
-            height: 45,
-            backgroundColor: '#9b6ad6',
-            fontSize: 15,
-            transform: 'scale(1)',
-            color: '#fff',
-            transition: 'all 0.5s ease 0s',
-            '&:hover': { transform: 'scale(1.1)', transition: 'all 0.5s ease 0s', backgroundColor: 'rgb(17, 169, 17)' },
-          }}
-        >
-          Ещё раз
-        </Button> */}
       </Box>
     </div>
   )
