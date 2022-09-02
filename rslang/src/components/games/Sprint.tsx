@@ -82,6 +82,9 @@ export const Sprint = () => {
         (value === 'true' && currentWord.wordTranslate === currentRussianWord) ||
         (value === 'false' && currentWord.wordTranslate !== currentRussianWord)
       ) {
+        if (currentSeries === 3 || currentSeries === 6 || currentSeries === 9) {
+          seriesContainer.current.innerHTML = ''
+        }
         seriesContainer.current.innerHTML += ' <img src="https://img.icons8.com/emoji/452/star-emoji.png"/>'
         setBorderGreen(true)
         setTimeout(() => {
