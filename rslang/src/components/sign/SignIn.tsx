@@ -1,10 +1,8 @@
-import { Alert } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { IAuth, IFullUser, IResponse, IUser } from '../../models/IUser';
+import { IResponse } from '../../models/IUser';
 import { registrationAPI } from '../../services/PostService';
-import { loginSlice } from '../../store/reducers/LoginSlice';
 import { userSlice } from '../../store/reducers/UserSlice';
 import '../../style/sign/SignIn.scss';
 
@@ -14,15 +12,12 @@ export function SignIn() {
     const [authorization] = registrationAPI.useLoginMutation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const isAuth = useAppSelector((state ) => state.loginSlice);
     const user = useAppSelector((state ) => state.userSlice);
-    // const changeLogin = loginSlice.actions.changeLogin;
-    // const changeToken = loginSlice.actions.changeToken;
-    // const changeAvatarUrl = loginSlice.actions.chageAvatarUrl;
     const setUser = userSlice.actions.setUser;
     const dispatch = useAppDispatch();
 
     const handleSubmit = useCallback(async() => {
+        
         if(!email || !password){
             alert('Пароль или почта не могут быть пустыми');
             return;
@@ -32,6 +27,7 @@ export function SignIn() {
             dispatch(setUser(response.data));
             localStorage.setItem('user', JSON.stringify(response));
             alert(response.data.message);
+            window.location.href = '/';
         }else{
             alert(response.error.data.message);
 
@@ -54,8 +50,8 @@ export function SignIn() {
                         <input type='password' value={password} onChange={(e) => {setPassword(e.target.value)}} />
                     </div>
                 </div>
-                <div className="login__btn" onClick={() => handleSubmit() } >Login</div> 
-                <Link className='login__register' to='/signup'>Do not have an account? Just click on me!</Link>
+                <div onClick={() => handleSubmit() } className="login__btn" >Login</div> 
+                <Link className='login__register' to='/signup'>Нет аккаунта? Просто нажми на меня</Link>
             </div>
         </div>
     )

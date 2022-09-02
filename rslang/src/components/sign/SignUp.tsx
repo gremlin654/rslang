@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { IFullUser, IUser } from '../../models/IUser';
 import { registrationAPI } from '../../services/PostService';
-import { loginSlice } from '../../store/reducers/LoginSlice';
 import { userSlice } from '../../store/reducers/UserSlice';
 
 export function SignUp() {
@@ -37,6 +36,7 @@ export function SignUp() {
         const response = await registration({ email, password, name }) as IResponse;
         if(!response.error){
             alert(`${response.data.message}. Авторизуйтесь чтобы продолжить`);
+            window.location.href = '/signin';
         }else{
             alert('Этот пользователь уже существует');
         }
@@ -64,7 +64,7 @@ export function SignUp() {
                     </div>
                 </div>
                 <div className="login__btn" onClick={() => handleSubmit()}>Register</div>
-                <Link className='login__register' to='/signin'>Have account? Just click on me!</Link>
+                <Link className='login__register' to='/signin'>Есть аккаунт? Жми на меня!</Link>
             </div>
         </div>
     )
