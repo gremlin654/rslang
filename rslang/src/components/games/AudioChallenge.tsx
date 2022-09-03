@@ -26,7 +26,7 @@ const keyCode = {
 }
 
 export const AudioChallenge = () => {
-  const { soundVolume, wordVolume } = useAppSelector((state) => state.levelSlice.settings)
+  const { soundVolume, wordVolume } = useAppSelector((state) => state.userSlice.settings)
   const { words, isLoading } = useAppSelector((state) => state.levelSlice)
   const { setLevel, setActiveWords } = levelSlice.actions
   const dispatch = useAppDispatch()

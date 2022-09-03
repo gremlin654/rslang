@@ -36,7 +36,7 @@ const keyCode = {
 const initialObject = {} as IWord
 
 export const Sprint = () => {
-  const { soundVolume, musicVolume } = useAppSelector((state) => state.levelSlice.settings)
+  const { soundVolume, musicVolume } = useAppSelector((state) => state.userSlice.settings)
   const { words, isLoading } = useAppSelector((state) => state.levelSlice)
   const { setLevel, setActiveWords } = levelSlice.actions
   const dispatch = useAppDispatch()

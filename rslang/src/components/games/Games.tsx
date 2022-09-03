@@ -32,6 +32,9 @@ const Games = () => {
             <h3 className='game__title'>Спринт</h3>
             <p className='game__text'>Проверьте себя, сколько очков вы cможете получить за одну минуту, отвечая , что правильно, а что нет.</p>
           </div>
+          <div className='game__text-container'>
+            <p className='game__text'>Управление мышкой и клавишь стрелок ← →</p>
+          </div>
           <button className='game__btn' disabled={level === null}>
             {level === null ? (
               'Играть'
@@ -48,6 +51,9 @@ const Games = () => {
           <div className='game__text-container'>
             <h3 className='game__title'>Аудиовызов </h3>
             <p className='game__text'>Проверьте свои навыки слушания, выбирая правильное значение после услышанного слова.</p>
+          </div>
+          <div className='game__text-container'>
+            <p className='game__text'>Управление мышкой и клавишь цифровой клавиатуры 1, 2, 3, 4</p>
           </div>
           <button className='game__btn' disabled={level === null}>
             {level === null ? (
