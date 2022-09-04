@@ -1,5 +1,3 @@
-footer {
-}
 .footer__container {
   background-color: #360570;
   color: #fff;
@@ -15,5 +13,20 @@ footer {
   a {
     color: #fff;
     padding-left: 20px;
+  }
+}
+
+@media (max-width: 950px) {
+  .footer__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer-gitHub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
 }

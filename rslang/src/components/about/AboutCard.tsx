@@ -17,11 +17,6 @@ export function AboutCard({currentImage, currentText, currentTitle}: {currentIma
                 {currentText}
                 </Typography>
             </CardContent>
-            <CardActions>
-            <Link href="#" color="inherit">
-                {'color="inherit"'}
-            </Link>
-            </CardActions>
         </Card>
     );
 }

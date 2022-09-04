@@ -100,5 +100,7 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  max-width: 1600px;
+  min-height: 100vh;
+  justify-content: space-between;
+  width: 100%;
 }
