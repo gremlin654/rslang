@@ -33,7 +33,6 @@ export const Difficult = () => {
     setFilter(resWords)
   }, [wordsUser])
   // console.log(filter);
-  console.log(wordsUser)
   return (
     <div className='wrapper'>
       <h2>Сложные слова</h2>

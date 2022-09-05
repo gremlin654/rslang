@@ -81,9 +81,8 @@ export const Cards = ({word}: ElItemProps) => {
             wordBody: word,
         }
         if (!user.token) {
-            // return showMessage(
-            //     'Для добавления / удаления слов необходимо авторизоваться',
-            //     404
+            // return console.log(
+            //     'Для добавления / удаления слов необходимо авторизоваться'
             // )
         }
         const { text, code } = await dispatch(uploadWordsUser(body, user.token))
@@ -104,7 +103,7 @@ export const Cards = ({word}: ElItemProps) => {
                                         data-word-name={word.word}
                                         id={word._id}
                                         value={`${difficult}`}>
-            <Delete width='40px' height='40px'></Delete>
+            <Delete width='40px' height='40px' className={user.settings.deleteWord ? 'btn-difficult' : 'btn-difficult-block'} ></Delete>
           </Button>
         </CardActions>
         <CardContent>

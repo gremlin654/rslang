@@ -13,7 +13,7 @@ const initialState = localStorage.getItem('user')
       settings: {
         soundVolume: 0,
         musicVolume: 0,
-        wordVolume: 50,
+        wordVolume: 0.5,
         difficultWord: true,
         deleteWord: true,
         translateWord: true,

@@ -18,9 +18,11 @@ export const wordSlice = createSlice({
   reducers: {
     setPage: (state: IWordState, action: PayloadAction<number>) => {
       state.page = action.payload;
+      localStorage.setItem('page', JSON.stringify(state.page))
     },
     setGroup: (state: IWordState, action: PayloadAction<number>) => {
       state.group = action.payload;
+      localStorage.setItem('group', JSON.stringify(state.group))
     },
   },
   extraReducers: {

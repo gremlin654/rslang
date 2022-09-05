@@ -17,6 +17,7 @@ export interface IWord {
   difficult: boolean
   correct: number
   fail: number
+  learn: boolean
 }
 
 export interface IUserWord {
