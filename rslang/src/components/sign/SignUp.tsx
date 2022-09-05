@@ -36,7 +36,6 @@ export function SignUp() {
         const response = await registration({ email, password, name }) as IResponse;
         if(!response.error){
             alert(`${response.data.message}. Авторизуйтесь чтобы продолжить`);
-            window.location.href = '/signin';
         }else{
             alert('Этот пользователь уже существует');
         }
