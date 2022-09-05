@@ -154,7 +154,7 @@ export const Book = ({word, arr, render, setRender, uploadWordsUser}: ElItemProp
                                         data-word-name={word.word}
                                         id={word._id}
                                         value='true'
-                                        className={word.correct === 3 || learn === true ? 'bg-false' : 'bg-true'}>
+                                        className={word.correct === 3 || learn === true  ? 'bg-false' : 'bg-true'}>
               Изучено
             </button>
             <button onClick={updateWordDel} data-name="deleted"
